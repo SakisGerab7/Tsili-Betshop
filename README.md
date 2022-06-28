@@ -7,7 +7,6 @@ A simple betting CLI application written in C.
 Open your terminal in the directory where you cloned the repository and write:
 
 ```bash
-mkdir objs
 make
 ```
 

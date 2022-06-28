@@ -60,6 +60,8 @@ int admin_is_valid(char *admin) {
         if (strcmp(admin, admins[i][0]) == 0) {
             printf("[password for %s]: ", admin);
             scanf("%ms", &password);
+            while (getchar() != '\n');
+
             res = strcmp(password, admins[i][1]);
             free(password);
             return res == 0 ? 0 : -2;

@@ -52,11 +52,9 @@ void main_loop(database_t *db) {
     char option;
 
     do {
-        if (!TEST_MODE) while (getchar() != '\n');
-        do {
-            printf(ORANGE "%s@tsili" RESET ":" YELLOW "%s" RESET "$ ", db->admin, db->name);
-            option = getchar();
-        } while (option == '\n');
+        printf(ORANGE "%s@tsili" RESET ":" YELLOW "%s" RESET "$ ", db->admin, db->name);
+        scanf("%c", &option);
+        if (option == '\n') continue;
 
         switch (option) {
         case 'p':
@@ -97,6 +95,8 @@ void main_loop(database_t *db) {
                 "  Press " YELLOW "h" RESET " to see the program usage.\n");
             break;
         }
+
+        while (getchar() != '\n');
     } while (option != 'q');
 }
 
