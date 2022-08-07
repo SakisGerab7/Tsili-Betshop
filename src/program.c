@@ -52,7 +52,7 @@ void main_loop(database_t *db) {
     char option;
 
     do {
-        printf(ORANGE "%s@tsili" RESET ":" YELLOW "%s" RESET "$ ", db->admin, db->name);
+        printf(ORANGE("%s@tsili") ":" YELLOW("%s") "$ ", db->admin, db->name);
         scanf("%c", &option);
         if (option == '\n') continue;
 
@@ -79,7 +79,7 @@ void main_loop(database_t *db) {
                 );
             } else {
                 save_database(db);
-                info("Data saved successfuly on " YELLOW "%s" RESET ".\n", db->name);
+                info("Data saved successfuly on " YELLOW("%s") ".\n", db->name);
             }
             break;
         case 'q':
@@ -92,7 +92,7 @@ void main_loop(database_t *db) {
             break;
         default:
             error("Invalid option.\n"
-                "  Press " YELLOW "h" RESET " to see the program usage.\n");
+                "  Press " YELLOW("h") " to see the program usage.\n");
             break;
         }
 
@@ -120,7 +120,7 @@ void add_player(database_t *db) {
     player = new_player(username);
     vector_push(db->players, player);
 
-    info("New player " YELLOW "%s" RESET " added.\n", username);
+    info("New player " YELLOW("%s") " added.\n", username);
 
     free(username); 
 }
@@ -144,7 +144,7 @@ void add_match(database_t *db) {
     vector_push(db->matches, match);
     matches_sort_by_id(db->matches);
 
-    info("New match " YELLOW "%s vs %s" RESET " added [id=" YELLOW "%d" RESET "].\n", first_team, second_team, match->id);
+    info("New match " YELLOW("%s vs %s") " added [id=" YELLOW("%d") "].\n", first_team, second_team, match->id);
 
     free(first_team);
     free(second_team);
@@ -185,7 +185,7 @@ void add_bet(database_t *db) {
     bet = new_bet(player, match, choice);
     vector_push(db->bets, bet);
     info("New bet successfuly added.\n"
-        "  Player " YELLOW "%s" RESET " played " YELLOW "%c" RESET " on " YELLOW "%s vs %s" RESET ".\n",
+        "  Player " YELLOW("%s") " played " YELLOW("%c") " on " YELLOW("%s vs %s") ".\n",
         bet->player->username, choice, bet->match->first_team, bet->match->second_team
     );
 
@@ -214,7 +214,7 @@ void add_result(database_t *db) {
 
     match = vector_at(db->matches, res);
     match->done = 1;
-    info("Match " YELLOW "%s vs %s" RESET " resulted in " YELLOW "%c" RESET ".\n",
+    info("Match " YELLOW("%s vs %s") " resulted in " YELLOW("%c") ".\n",
         match->first_team, match->second_team, match_result);
     for (int i = 0; i < vector_count(db->bets); i++) {
         bet = vector_at(db->bets, i);
@@ -224,19 +224,19 @@ void add_result(database_t *db) {
             if (bet->choice == match_result) {
                 if (match_result == TIE) {
                     player->points += 1;
-                    printf("  Player " YELLOW "%10s" RESET " played " YELLOW "%c" RESET " and won  " 
-                        YELLOW "1€" RESET " [total=" YELLOW "%2d€" RESET "].\n",
+                    printf("  Player " YELLOW("%10s") " played " YELLOW("%c") " and won  " 
+                        YELLOW("1€") " [total=" YELLOW("%2d€") "].\n",
                         player->username, bet->choice, player->points);
                 } else {
                     player->points += 3;
-                    printf("  Player " YELLOW "%10s" RESET " played " YELLOW "%c" RESET " and won  " 
-                        YELLOW "3€" RESET " [total=" YELLOW "%2d€" RESET "].\n",
+                    printf("  Player " YELLOW("%10s") " played " YELLOW("%c") " and won  " 
+                        YELLOW("3€") " [total=" YELLOW("%2d€") "].\n",
                         player->username, bet->choice, player->points);
                 }
             } else {
                 player->points -= 1;
-                printf("  Player " YELLOW "%10s" RESET " played " YELLOW "%c" RESET " and lost " 
-                    YELLOW "1€" RESET " [total=" YELLOW "%2d€" RESET "].\n",
+                printf("  Player " YELLOW("%10s") " played " YELLOW("%c") " and lost " 
+                    YELLOW("1€") " [total=" YELLOW("%2d€") "].\n",
                     player->username, bet->choice, player->points);
             }
         }
