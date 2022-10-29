@@ -38,15 +38,6 @@ void vector_push(vector_t *vector, void *element) {
 }
 
 void vector_clear(vector_t *vector) {
-	for (int i = 0; i < vector_count(vector); i++) {
-		switch (vector->type) {
-		case TYPE_PLAYER: player_clear(vector_at(vector, i)); break;
-		case TYPE_MATCH: match_clear(vector_at(vector, i)); break;
-		case TYPE_BET: free(vector_at(vector, i)); break;
-		default: break;
-		}
-    }
-
 	free(vector->table);
     free(vector);
 }

@@ -1,5 +1,6 @@
 .vscode/
 objs/*
+backup/*
 bet420
 test
 tsili

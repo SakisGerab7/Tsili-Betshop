@@ -8,6 +8,7 @@
 typedef struct {
     int id, done; 
     char *first_team, *second_team;
+    double odds[3];
 } match_t;
 
 typedef struct {
@@ -16,7 +17,7 @@ typedef struct {
 } player_t;
 
 typedef struct {
-    int done;
+    int done, amount;
     player_t *player;
     match_t *match;
     enum {
@@ -24,9 +25,11 @@ typedef struct {
     } choice;
 } bet_t;
 
-match_t *new_match(char *first_team, char *second_team);
+int choice_is_valid(char choice);
+
+match_t *new_match(char *first_team, char *second_team, double odds[3]);
 player_t *new_player(char *username);
-bet_t *new_bet(player_t *player, match_t *match, char choice);
+bet_t *new_bet(player_t *player, match_t *match, char choice, int amount);
 
 void match_clear(match_t *match);
 void player_clear(player_t *player);

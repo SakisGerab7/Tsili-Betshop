@@ -14,13 +14,14 @@ typedef struct {
     vector_t *bets;
 } database_t;
 
-database_t *init_database(int argc, char *argv[]);
+void init_database(database_t *db, int argc, char *argv[]);
 void main_loop(database_t *db);
 void clean_up(database_t *db);
 
 void add_player(database_t *db);
 void add_match(database_t *db);
 void add_bet(database_t *db);
+void donate_money(database_t *db);
 void add_result(database_t *db);
 void print_tables(database_t *db);
 void print_usage_msg();
